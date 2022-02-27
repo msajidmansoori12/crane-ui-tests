@@ -18,10 +18,14 @@ export function click(fieldId: string): void {
 
 export function login(): void {
   cy.visit(craneUiUrl);
-  cy.findByText('kube:admin').click();
-  inputText(loginView.userNameInput, userName);
-  inputText(loginView.userPasswordInput, userPassword);
-  clickByText('button', 'Log in');
+  cy.get('body').then((body) => {
+    if (body.find("h1:contains('Migration Toolkit for Containers')").length != 1) {
+      cy.findByText('kube:admin').click();
+      inputText(loginView.userNameInput, userName);
+      inputText(loginView.userPasswordInput, userPassword);
+      clickByText('button', 'Log in');
+    }   
+  })
 }
 
 export function next(): void {
