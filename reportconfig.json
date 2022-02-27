@@ -1,0 +1,20 @@
+{
+    "viewportWidth": 1280,
+    "viewportHeight": 880,
+    "video": false,
+    "env": {
+        "user": "kubeadmin",
+        "pass": "best-password-ever",
+        "craneUrl": "https://migration-openshift-migration.apps.devcluster.openshift.com",
+        "sourceCluster": "https://api.cam-src.devcluster.openshift.com:6443 -u kubeadmin -p password",
+        "targetCluster": "https://api.cam.tgt.devcluster.openshift.com:6443 -u kubeadmin -p password"
+    },
+    "reporter": "cypress-multi-reporters",
+    "reporterOptions": {
+        "reporterEnabled": "mocha-junit-reporter",
+        "mochaJunitReporterReporterOptions": {
+            "mochaFile": "cypress/reports/junit/results-[hash].xml"
+        }
+    },
+    "defaultCommandTimeout": 8000
+}
