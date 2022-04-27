@@ -4,10 +4,10 @@
   "supportFile": "cypress/support/commands.js",
   "env": {
         "user": "kubeadmin",
-        "password": "best-password-ever",
-        "craneUrl": "https://migration-openshift-migration.apps.devcluster.openshift.com",
-        "sourceCluster": "https://api.cam-src.devcluster.openshift.com:6443 -u kubeadmin -p  password",
-        "targetCluster": "https://api.cam.tgt.devcluster.openshift.com:6443 -u kubeadmin -p  password"
+        "password": "FYy2I-hFpDt-dZy4F-ngaFu",
+        "craneUrl": "https://migration-openshift-migration.apps.cam-tgt-39560.qe.gcp.devcluster.openshift.com/",
+        "sourceCluster": "https://api.cam-src-39560.qe.gcp.devcluster.openshift.com:6443 -u kubeadmin -p DnUZv-AV4i7-fVGwi-iJLnZ",
+        "targetCluster": "https://api.cam-tgt-39560.qe.gcp.devcluster.openshift.com:6443 -u kubeadmin -p FYy2I-hFpDt-dZy4F-ngaFu"
    },
   "retries": {
         "runMode": 2,

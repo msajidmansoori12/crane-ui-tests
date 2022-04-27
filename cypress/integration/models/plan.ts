@@ -4,7 +4,7 @@ import { navMenuPoint } from '../views/menu.view';
 import { planNameInput, searchInput, searchButton, directPvMigrationCheckbox, verifyCopyCheckbox,
   directImageMigrationCheckbox, dataLabel, kebab, kebabDropDownItem, editTargetNamepace } from '../views/plan.view';
 
-const saveEdit = 'span#save-edit-icon';
+const saveEdit = 'button[aria-label*=Save]';
 const targetNamespace = 'input[name="currentTargetNamespaceName"]';
 
 export class Plan {

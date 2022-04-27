@@ -121,7 +121,7 @@ export const IndirectChangeTargetNamespace: PlanData = {
   target: 'host',
   repo: 'automatic',
   namespaceList: ['nandini'],
-  directImageMigration : true,
-  directPvmigration : true,
+  directImageMigration : false,
+  directPvmigration : false,
   nondefaultTargetNamespace : true,
 }

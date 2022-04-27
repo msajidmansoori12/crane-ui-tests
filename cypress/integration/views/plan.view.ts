@@ -8,7 +8,7 @@ export const selectRepo = '#selectedStorage';
 //Plan creation form - Namespaces page
 export const searchInput = '#name-input';
 export const searchButton = 'button.pf-c-button.pf-m-control';
-export const editTargetNamepace= 'span#inline-edit-icon';
+export const editTargetNamepace= 'button.pf-c-button';
 
 //Plan creation form - copy options page
 export const verifyCopyCheckbox = '.pf-c-check__input';
