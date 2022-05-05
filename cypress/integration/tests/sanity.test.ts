@@ -1,6 +1,6 @@
 import { noVerifyCopyPlanData, verifyCopyPlanData, directPvPlanData, verifyCopydirectPvPlan,
   directImagePlanData, directImagePvPlan, indirectMultipleProjects, directMultipleProjects, changeTargetNamespace,
-  IndirectChangeTargetNamespace } from './cluster_config';
+  IndirectChangeTargetNamespace, storageClassConversionSource, storageClassConversionTarget } from './cluster_config';
 import { login } from '../../utils/utils';
 import { Plan } from '../models/plan'
 
@@ -45,6 +45,30 @@ describe('Automated tests to do direct and indirect migrations and Basic Pipelin
       plan.delete(Data);
       cy.exec(`"${configurationScript}" post_migration_verification_on_target ${Data.namespaceList} "${targetCluster}"`, { timeout: 100000 });
       cy.exec(`"${configurationScript}" cleanup_source_cluster ${Data.namespaceList} "${sourceCluster}"`, { timeout: 100000 });
-    });
+    })
+
+    it ('Storage class conversion -Source cluster',() =>  {
+      login();
+      const [Data] = [storageClassConversionSource] 
+      cy.exec(`"${configurationScript}" setup_source_cluster ${Data.namespaceList} "${sourceCluster}"`, { timeout: 200000 });
+      plan.create(Data);
+      plan.execute(Data);
+      cy.exec(`"${configurationScript}" post_migration_verification_on_target ${Data.namespaceList} "${sourceCluster}"`, { timeout: 100000 });
+      plan.rollback(Data);
+      plan.delete(Data);
+      cy.exec(`"${configurationScript}" cleanup_source_cluster ${Data.namespaceList} "${sourceCluster}"`, { timeout: 100000 });
+    })
+
+    it ('Storage class conversion -Target cluster',() =>  {
+      login();
+      const [Data] = [storageClassConversionTarget] 
+      cy.exec(`"${configurationScript}" setup_source_cluster ${Data.namespaceList} "${targetCluster}"`, { timeout: 200000 });
+      plan.create(Data);
+      plan.execute(Data);
+      cy.exec(`"${configurationScript}" post_migration_verification_on_target ${Data.namespaceList} "${targetCluster}"`, { timeout: 100000 });
+      plan.rollback(Data);
+      plan.delete(Data);
+      cy.exec(`"${configurationScript}" cleanup_source_cluster ${Data.namespaceList} "${targetCluster}"`, { timeout: 100000 });
+    })
   });
 })
