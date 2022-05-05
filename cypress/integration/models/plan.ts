@@ -160,6 +160,11 @@ export class Plan {
     this.generalStep(planData);
     this.selectNamespace(planData);
     this.persistentVolumes();
+    
+    if (planData.migration_type == 'State migration') { 
+      this.copyOptions(planData);
+    }
+    
     if (planData.migration_type == 'Full migration') {
       this.copyOptions(planData);
       this.migrationOptions(planData);

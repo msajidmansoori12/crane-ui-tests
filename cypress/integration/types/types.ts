@@ -17,8 +17,8 @@ export type RepoData = {
 export type PlanData = {
   name: string;
   source: string;
-  target: string;
-  repo: string;
+  target?: string;
+  repo?: string;
   migration_type: string;
   namespaceList : string[];
   verifyCopy?: boolean;

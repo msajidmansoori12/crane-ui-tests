@@ -142,3 +142,11 @@ export const storageClassConversionTarget: PlanData = {
   namespaceList: ['test-scc']
 }
 
+export const InterclusterState: PlanData = {
+  name: 'inter-state-plan',
+  migration_type: 'State migration',
+  source: 'source-cluster',
+  target: 'host',
+  repo: 'automatic',
+  namespaceList: ['ocp-attached-pvc']
+}
