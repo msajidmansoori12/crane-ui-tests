@@ -125,3 +125,28 @@ export const IndirectChangeTargetNamespace: PlanData = {
   directPvmigration : false,
   nondefaultTargetNamespace : true,
 }
+
+export const storageClassConversionSource: PlanData = {
+  name: 'scc-source',
+  migration_type: 'Storage class conversion',
+  source: 'source-cluster',
+  repo: 'automatic',
+  namespaceList: ['test-scc']
+}
+
+export const storageClassConversionTarget: PlanData = {
+  name: 'scc-target',
+  migration_type: 'Storage class conversion',
+  source: 'host',
+  repo: 'automatic',
+  namespaceList: ['test-scc']
+}
+
+export const InterclusterState: PlanData = {
+  name: 'inter-state-plan',
+  migration_type: 'State migration',
+  source: 'source-cluster',
+  target: 'host',
+  repo: 'automatic',
+  namespaceList: ['ocp-attached-pvc']
+}

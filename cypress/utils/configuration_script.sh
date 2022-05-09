@@ -12,7 +12,9 @@ setup_source_cluster() {
         sleep 30
         oc new-project $i
         oc new-app django-psql-persistent
-        sleep 30
+        while [[ $(oc get pods -l deployment=django-psql-persistent-1 -n $i -o 'jsonpath={..status.conditions[?(@.type=="Ready")].status}') != "True" ]]; do
+            sleep 5
+        done
         curl $(oc get routes -n $i | grep django| awk '{print $2}')
     done
 }

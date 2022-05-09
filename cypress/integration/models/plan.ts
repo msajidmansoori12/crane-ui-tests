@@ -17,10 +17,11 @@ export class Plan {
     inputText(planNameInput, name);
     selectFromDroplist('Select', migration_type)
     selectFromDroplist('Select source', source);
-    if (migration_type == 'Full migration' || migration_type == 'State migration') {
+
+    if (migration_type != 'Storage class conversion') {
       selectFromDroplist('Select target', target);
+      selectFromDroplist('Select repository', repo);
     }
-    selectFromDroplist('Select repository', repo);
     next();
   }
 
@@ -90,7 +91,7 @@ export class Plan {
     clickByText('button', 'Next');
   }
 
-  protected run(name: string): void {
+  protected run(name: string, migration_type: string): void {
     cy.get('th')
       .contains(name)
       .parent('tr')
@@ -98,7 +99,10 @@ export class Plan {
         click(kebab);
     });
     clickByText(kebabDropDownItem, 'Cutover');
-    cy.get('#transaction-halt-checkbox').uncheck()
+    if (migration_type == 'Full migration') {
+      // This option is available for full migration.
+      cy.get('#transaction-halt-checkbox').uncheck()
+    }
     //Confirm dialog before migration
     clickByText('button', 'Migrate');
   }
@@ -156,9 +160,16 @@ export class Plan {
     this.generalStep(planData);
     this.selectNamespace(planData);
     this.persistentVolumes();
-    this.copyOptions(planData);
-    this.migrationOptions(planData);
-    this.hooks();
+    
+    if (planData.migration_type == 'State migration') { 
+      this.copyOptions(planData);
+    }
+    
+    if (planData.migration_type == 'Full migration') {
+      this.copyOptions(planData);
+      this.migrationOptions(planData);
+      this.hooks();
+    }
 
     //Assert that plan is successfully validated before being run
     cy.get('span#condition-message').should('contain', 'The migration plan is ready', { timeout : 10000 });
@@ -169,9 +180,9 @@ export class Plan {
   }
 
   execute(planData: PlanData): void {
-    const { name } = planData;
+    const { name, migration_type } = planData;
     Plan.openList();
-    this.run(name);
+    this.run(name, migration_type);
     this.waitForSuccess(name);
   }
 

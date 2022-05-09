@@ -1,6 +1,6 @@
 import { noVerifyCopyPlanData, verifyCopyPlanData, directPvPlanData, verifyCopydirectPvPlan,
   directImagePlanData, directImagePvPlan, indirectMultipleProjects, directMultipleProjects, changeTargetNamespace,
-  IndirectChangeTargetNamespace } from './cluster_config';
+  IndirectChangeTargetNamespace, InterclusterState } from './cluster_config';
 import { login } from '../../utils/utils';
 import { Plan } from '../models/plan'
 
@@ -23,6 +23,7 @@ describe('Automated tests to do direct and indirect migrations and Basic Pipelin
     [changeTargetNamespace, 'Direct migration of a single project to non-default target namespace'],
     [IndirectChangeTargetNamespace, 'Indirect migration of a single project to non-default target namespace'],
     [directImagePvPlan, 'Direct image and PV migration'],
+    [InterclusterState, 'Inter cluster state migration plan'],
   ];
   
   selectorTuple.forEach(($type) => {
