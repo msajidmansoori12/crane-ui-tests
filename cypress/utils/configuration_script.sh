@@ -5,6 +5,7 @@ CLUSTER=$3
 
 setup_source_cluster() {
     #This function creates a new project and application for migration on source cluster.
+    bash -ex
     oc login $CLUSTER --insecure-skip-tls-verify
     for i in $NAMESPACE_LIST; do
         if (oc get project $i 2>/dev/null); then
