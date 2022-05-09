@@ -30,6 +30,8 @@ describe('Automated tests to do direct and indirect migrations and Basic Pipelin
 
     it(`${migrationType}`, () => {
       login();
+      cy.exec(`"bash -ex ls $(pwd)"`)
+      cy.exec(`"bash -ex cat ${configurationScript}"`)
       cy.exec(`"bash -ex ${configurationScript}" setup_source_cluster ${Data.namespaceList} "${sourceCluster}"`, { timeout: 200000 }).its('code').should('eq', 0);;
       cy.exec(`"bash -ex ${configurationScript}" setup_target_cluster ${Data.namespaceList} "${targetCluster}"`, { timeout: 200000 }).its('code').should('eq', 0);;
       plan.create(Data);
