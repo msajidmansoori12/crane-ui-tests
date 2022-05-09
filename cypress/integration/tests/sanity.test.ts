@@ -29,14 +29,9 @@ describe('Automated tests to do direct and indirect migrations and Basic Pipelin
     const [Data, migrationType] = $type;
 
     it(`${migrationType}`, () => {
-      cy.log("Login")
       login();
-      cy.log(`"setup source cluster: ${sourceCluster}"`)
-      cy.exec('echo "HELLO WORLD" > /tmp/testfile')
-      cy.log(`"Executing: [${configurationScript}" setup_source_cluster ${Data.namespaceList} "${sourceCluster}]"`)
-      cy.exec(`"${configurationScript}" setup_source_cluster ${Data.namespaceList} "${sourceCluster}"`, { timeout: 200000 }).its('code').should('eq', 0);;
-      cy.log(`"setup target cluster: "${targetCluster}""`)
-      cy.exec(`"${configurationScript}" setup_target_cluster ${Data.namespaceList} "${targetCluster}"`, { timeout: 200000 }).its('code').should('eq', 0);;
+      cy.exec(`"bash -ex ${configurationScript}" setup_source_cluster ${Data.namespaceList} "${sourceCluster}"`, { timeout: 200000 }).its('code').should('eq', 0);;
+      cy.exec(`"bash -ex ${configurationScript}" setup_target_cluster ${Data.namespaceList} "${targetCluster}"`, { timeout: 200000 }).its('code').should('eq', 0);;
       plan.create(Data);
       plan.execute(Data);
       if (`${migrationType}` == 'Rollover indirect migration and then migrate' ||
