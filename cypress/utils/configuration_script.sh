@@ -1,3 +1,4 @@
+#!/bin/bash
 NAMESPACE=$2
 NAMESPACE_LIST="$(echo -e "$NAMESPACE" | sed 's/,/ /g')"
 CLUSTER=$3
