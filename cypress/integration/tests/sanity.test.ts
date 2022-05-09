@@ -6,7 +6,7 @@ import { Plan } from '../models/plan'
 
 const sourceCluster = Cypress.env('sourceCluster');
 const targetCluster = Cypress.env('targetCluster');
-const configurationScript = cy.exec('pwd') + "/crane-ui-tests/cypress/utils/configuration_script.sh"
+const configurationScript = "${WORKSPACE}/crane-ui-tests/cypress/utils/configuration_script.sh"
 
 describe('Automated tests to do direct and indirect migrations and Basic Pipeline Status Verification', () => {
   const plan = new Plan();
@@ -30,7 +30,6 @@ describe('Automated tests to do direct and indirect migrations and Basic Pipelin
 
     it(`${migrationType}`, () => {
       login();
-      cy.log()
       cy.exec(`"bash -ex ${configurationScript}" setup_source_cluster ${Data.namespaceList} "${sourceCluster}"`, { timeout: 200000 }).its('code').should('eq', 0);;
       cy.exec(`"bash -ex ${configurationScript}" setup_target_cluster ${Data.namespaceList} "${targetCluster}"`, { timeout: 200000 }).its('code').should('eq', 0);;
       plan.create(Data);
