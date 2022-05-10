@@ -6,7 +6,7 @@ import { Plan } from '../models/plan'
 
 const sourceCluster = Cypress.env('sourceCluster');
 const targetCluster = Cypress.env('targetCluster');
-const configurationScript = "../../utils/configuration_script.sh"
+const configurationScript = "cypress/utils/configuration_script.sh"
 
 describe('Automated tests to do direct and indirect migrations and Basic Pipeline Status Verification', () => {
   const plan = new Plan();
